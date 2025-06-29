@@ -34,6 +34,21 @@ class _DbExampleState extends State<DbExample> {
     return db.query('notas');
   }
 
+  Future<void> actualizarNota(int id, String nuevoContenido) async {
+    final db = await initDb();
+    await db.update(
+      "notas",
+      {"contenido": nuevoContenido},
+      where: "id=?",
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> eliminarNota(int id) async {
+    final db = await initDb();
+    db.delete("notas", where: "id=?", whereArgs: [id]);
+  }
+
   setNotas() async {
     notasList = await obtenerNotas();
     setState(() {});
@@ -66,6 +81,18 @@ class _DbExampleState extends State<DbExample> {
                   await insertarNota("Ventas", "vender mi ropa usada");
                 },
                 child: Text("Insertar nota"),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await actualizarNota(1, "Este es el nuevo contenido");
+                },
+                child: Text("Actualizar nota"),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await eliminarNota(1);
+                },
+                child: Text("Eliminar nota"),
               ),
 
               notasList == null
