@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg12/db/db_admin_notas.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -81,10 +82,16 @@ class _DbExampleState extends State<DbExample> {
 
               ElevatedButton(
                 onPressed: () async {
-                  await insertarNota(
-                    "Compas",
-                    "Comprar huevos pan y aceotuinas",
-                  );
+                  final db = await NotasDatabase().database;
+                  await db.insert("notas", {
+                    "titulo": "vender",
+                    "contenido": "Vender cosas de la cochera",
+                  });
+
+                  // await insertarNota(
+                  //   "Compas",
+                  //   "Comprar huevos pan y aceotuinas",
+                  // );
                 },
                 child: Text("Insertar nota"),
               ),
