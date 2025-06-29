@@ -31,7 +31,10 @@ class _DbExampleState extends State<DbExample> {
 
   Future<List<Map<String, dynamic>>> obtenerNotas() async {
     final db = await initDb();
-    return db.query('notas');
+    // return db.query('notas', columns: ["titulo"], where: "titulo='Ventas'");
+    // return db.query('notas', columns: ["titulo"]);
+    return db.rawQuery("SELECT * FROM notas ");
+    // return db.rawQuery("SELECT titulo FROM notas WHERE titulo = 'Compas'");
   }
 
   Future<void> actualizarNota(int id, String nuevoContenido) async {
@@ -78,7 +81,10 @@ class _DbExampleState extends State<DbExample> {
 
               ElevatedButton(
                 onPressed: () async {
-                  await insertarNota("Ventas", "vender mi ropa usada");
+                  await insertarNota(
+                    "Compas",
+                    "Comprar huevos pan y aceotuinas",
+                  );
                 },
                 child: Text("Insertar nota"),
               ),
@@ -103,8 +109,8 @@ class _DbExampleState extends State<DbExample> {
                       itemBuilder: (BuildContext context, int index) {
                         final nota = notasList![index];
                         return ListTile(
-                          title: Text(nota["titulo"]),
-                          subtitle: Text(nota["contenido"]),
+                          title: Text(nota["titulo"] ?? "-"),
+                          subtitle: Text(nota["contenido"] ?? "-"),
                         );
                       },
                     ),
