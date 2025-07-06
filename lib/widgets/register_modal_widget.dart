@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg12/db/db_admin_gastos.dart';
+import 'package:gastosappg12/models/gasto_model.dart';
 import 'package:gastosappg12/models/type_model.dart';
 import 'package:gastosappg12/widgets/field_modal_widget.dart';
 import 'package:gastosappg12/widgets/item_type_widget.dart';
@@ -47,7 +49,30 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
       height: 40,
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          GastoModel gastoModel = GastoModel(
+            title: titleContoller.text,
+            price: double.parse(priceController.text),
+            datetime: dateController.text,
+            type: typeSelected,
+          );
+          DbAdminGastos().insertarGasto(gastoModel).then((value) {
+            if (value > 0) {
+              // SE HA INSERTADO CORRECTAMENTE
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.cyan,
+                  behavior: SnackBarBehavior.floating,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  content: Text("Se ha registrado correctamente"),
+                ),
+              );
+              Navigator.pop(context);
+            }
+          });
+        },
         style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
         child: Text("Añadir", style: TextStyle(color: Colors.white)),
       ),
@@ -76,12 +101,12 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
           ),
           FieldModalWidget(
             hint: "Ingresa el monto",
-            controller: titleContoller,
+            controller: priceController,
             isNumberKeyboard: true,
           ),
           FieldModalWidget(
             hint: "Ingresa la fecha",
-            controller: titleContoller,
+            controller: dateController,
             isDatePicker: true,
             function: () {
               showDateTimePicker();

@@ -9,12 +9,12 @@ import 'package:sqflite/sqlite_api.dart';
 class DbAdminGastos {
   Database? myDatabase;
 
-  static final DbAdminGastos _instance = DbAdminGastos._();
-
   DbAdminGastos._();
+
   factory DbAdminGastos() {
     return _instance;
   }
+  static final DbAdminGastos _instance = DbAdminGastos._();
 
   Future<Database?> _checkDatabase() async {
     if (myDatabase == null) {
