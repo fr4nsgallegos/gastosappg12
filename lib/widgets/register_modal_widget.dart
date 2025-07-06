@@ -14,6 +14,7 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
   TextEditingController titleContoller = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+  String typeSelected = "Alimentos";
 
   void showDateTimePicker() async {
     DateTime? datePicker = await showDatePicker(
@@ -79,7 +80,18 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
             runSpacing: 8,
             alignment: WrapAlignment.center,
             children:
-                typesList.map((e) => ItemTypeWidget(typeModel: e)).toList(),
+                typesList
+                    .map(
+                      (e) => ItemTypeWidget(
+                        typeModel: e,
+                        isSelected: typeSelected == e.type,
+                        tap: () {
+                          typeSelected = e.type;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),
