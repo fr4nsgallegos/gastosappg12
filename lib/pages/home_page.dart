@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gastosappg12/widgets/busqueda_widget.dart';
 import 'package:gastosappg12/widgets/item_widget.dart';
+import 'package:gastosappg12/widgets/register_modal_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void showRegisterModal() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return RegisterModalWidget();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +30,28 @@ class HomePage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  color: Colors.black,
-                  width: double.infinity,
-                  height: 120,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text(
-                        "Agregar",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () {
+                    showRegisterModal();
+                  },
+                  child: Container(
+                    color: Colors.black,
+                    width: double.infinity,
+                    height: 120,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.add, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          "Agregar",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -60,6 +81,8 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(color: Colors.black45, fontSize: 16),
                         ),
                         BusquedaWidget(),
+                        ItemWidget(),
+                        ItemWidget(),
                         ItemWidget(),
                       ],
                     ),
