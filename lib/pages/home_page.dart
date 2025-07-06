@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gastosappg12/db/db_admin_gastos.dart';
+import 'package:gastosappg12/generated/l10n.dart';
 import 'package:gastosappg12/models/gasto_model.dart';
 import 'package:gastosappg12/widgets/busqueda_widget.dart';
 import 'package:gastosappg12/widgets/item_widget.dart';
@@ -98,6 +99,8 @@ class _HomePageState extends State<HomePage> {
                           "Gestiona tus gastos de mejor forma",
                           style: TextStyle(color: Colors.black45, fontSize: 16),
                         ),
+                        Text(S.of(context).hello),
+                        Text(S.of(context).helloAlguien("jhonny")),
                         BusquedaWidget(),
                         Expanded(
                           child: ListView.builder(
