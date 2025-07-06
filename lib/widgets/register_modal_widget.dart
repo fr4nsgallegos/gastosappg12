@@ -41,6 +41,19 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
     print(dateController.text);
   }
 
+  _buildAddButton() {
+    return Container(
+      margin: EdgeInsets.only(top: 12),
+      height: 40,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+        child: Text("Añadir", style: TextStyle(color: Colors.white)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,6 +106,7 @@ class _RegisterModalWidgetState extends State<RegisterModalWidget> {
                     )
                     .toList(),
           ),
+          _buildAddButton(),
         ],
       ),
     );
