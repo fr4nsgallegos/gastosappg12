@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg12/widgets/busqueda_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -57,6 +58,7 @@ class HomePage extends StatelessWidget {
                           "Gestiona tus gastos de mejor forma",
                           style: TextStyle(color: Colors.black45, fontSize: 16),
                         ),
+                        BusquedaWidget(),
                       ],
                     ),
                   ),
